@@ -9,7 +9,7 @@ allprojects {
     targetCompatibility = JavaVersion.VERSION_11
 
     version 'v0.24.4'
-    group 'com.github.TeamNewPipe'
+    group 'com.github.hifirose'
 
     repositories {
         mavenCentral()
