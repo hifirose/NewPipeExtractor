@@ -69,6 +69,7 @@ public class StreamInfo extends Info {
 
     public static StreamInfo getInfo(@Nonnull final StreamingService service,
                                      final String url) throws IOException, ExtractionException {
+        System.out.println("sjhan getInfo url = "+url);
         return getInfo(service.getStreamExtractor(url));
     }
 

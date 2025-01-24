@@ -33,6 +33,7 @@ public abstract class Extractor {
     private final Downloader downloader;
 
     protected Extractor(final StreamingService service, final LinkHandler linkHandler) {
+        System.out.println("sjhan Extractor linkHandler = "+linkHandler.toString());
         this.service = Objects.requireNonNull(service, "service is null");
         this.linkHandler = Objects.requireNonNull(linkHandler, "LinkHandler is null");
         this.downloader = Objects.requireNonNull(NewPipe.getDownloader(), "downloader is null");
