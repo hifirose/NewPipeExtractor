@@ -100,6 +100,7 @@ public class YoutubeChannelExtractor extends ChannelExtractor {
             throws IOException, ExtractionException {
         final String channelPath = super.getId();
         final String id = resolveChannelId(channelPath);
+        System.out.println("sjhan onFetchPage id = " + id + " / channelPath " + channelPath);
         // Fetch Videos tab
         final YoutubeChannelHelper.ChannelResponseData data = getChannelResponse(id,
                 "EgZ2aWRlb3PyBgQKAjoA", getExtractorLocalization(), getExtractorContentCountry());
@@ -141,7 +142,7 @@ public class YoutubeChannelExtractor extends ChannelExtractor {
         assertPageFetched();
         if (channelAgeGateRenderer != null) {
             return Optional.ofNullable(channelAgeGateRenderer.getObject(AVATAR)
-                    .getArray(THUMBNAILS))
+                            .getArray(THUMBNAILS))
                     .map(YoutubeParsingHelper::getImagesFromThumbnailsArray)
                     .orElseThrow(() -> new ParsingException("Could not get avatars"));
         }
@@ -367,7 +368,7 @@ public class YoutubeChannelExtractor extends ChannelExtractor {
 
         if (channelHeader == null) {
             throw new ParsingException(
-            "Could not get channel verified status, no channel header has been extracted");
+                    "Could not get channel verified status, no channel header has been extracted");
         }
 
         return YoutubeChannelHelper.isChannelVerified(channelHeader);
