@@ -2,6 +2,7 @@ package org.schabi.newpipe.extractor.services.youtube;
 
 import com.grack.nanojson.JsonObject;
 import com.grack.nanojson.JsonWriter;
+
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
@@ -10,6 +11,7 @@ import org.schabi.newpipe.extractor.localization.Localization;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -47,9 +49,9 @@ public final class YoutubeChannelHelper {
      *
      * @param idOrPath a YouTube channel ID or URL path
      * @return a YouTube channel ID
-     * @throws IOException if a channel resolve request failed
+     * @throws IOException         if a channel resolve request failed
      * @throws ExtractionException if a channel resolve request response could not be parsed or is
-     * invalid
+     *                             invalid
      */
     @Nonnull
     public static String resolveChannelId(@Nonnull final String idOrPath)
@@ -66,9 +68,9 @@ public final class YoutubeChannelHelper {
         // so the unresolved url will be returned.
         if (!channelId[0].equals("channel")) {
             final byte[] body = JsonWriter.string(
-                    prepareDesktopJsonBuilder(Localization.DEFAULT, ContentCountry.DEFAULT)
-                            .value("url", "https://www.youtube.com/" + idOrPath)
-                            .done())
+                            prepareDesktopJsonBuilder(Localization.DEFAULT, ContentCountry.DEFAULT)
+                                    .value("url", "https://www.youtube.com/" + idOrPath)
+                                    .done())
                     .getBytes(StandardCharsets.UTF_8);
 
             final JsonObject jsonResponse = getJsonPostResponse(
@@ -142,7 +144,7 @@ public final class YoutubeChannelHelper {
      * @param localization the {@link Localization} to use
      * @param country      the {@link ContentCountry} to use
      * @return a {@link ChannelResponseData channel response data}
-     * @throws IOException if a channel request failed
+     * @throws IOException         if a channel request failed
      * @throws ExtractionException if a channel request response could not be parsed or is invalid
      */
     @Nonnull
@@ -155,9 +157,9 @@ public final class YoutubeChannelHelper {
         JsonObject ajaxJson = null;
 
         int level = 0;
-        while (level < 3) {
+        while (level < 8) {
             final byte[] body = JsonWriter.string(prepareDesktopJsonBuilder(
-                                    localization, country)
+                            localization, country)
                             .value(BROWSE_ID, id)
                             .value("params", parameters)
                             .done())
@@ -166,7 +168,7 @@ public final class YoutubeChannelHelper {
             final JsonObject jsonResponse = getJsonPostResponse(
                     "browse", body, localization);
 
-            System.out.println("sjhan newpiee JsonObject = "+jsonResponse.toString());
+            System.out.println("sjhan newpiee level = " + level + " / JsonObject = " + jsonResponse.toString());
 
             checkIfChannelResponseIsValid(jsonResponse);
 
@@ -413,7 +415,7 @@ public final class YoutubeChannelHelper {
      * @param fallbackChannelId the fallback channel ID, which can be null
      * @return the ID of the channel
      * @throws ParsingException if the channel ID cannot be got from the channel header, the
-     * channel response and the fallback channel ID
+     *                          channel response and the fallback channel ID
      */
     @Nonnull
     public static String getChannelId(
