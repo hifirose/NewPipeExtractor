@@ -1,5 +1,12 @@
 package org.schabi.newpipe.extractor.services.youtube;
 
+import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.defaultAlertsCheck;
+import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getJsonPostResponse;
+import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getTextFromObject;
+import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.hasArtistOrVerifiedIconBadgeAttachment;
+import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareDesktopJsonBuilder;
+import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+
 import com.grack.nanojson.JsonObject;
 import com.grack.nanojson.JsonWriter;
 
@@ -9,20 +16,13 @@ import org.schabi.newpipe.extractor.exceptions.ParsingException;
 import org.schabi.newpipe.extractor.localization.ContentCountry;
 import org.schabi.newpipe.extractor.localization.Localization;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.defaultAlertsCheck;
-import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getJsonPostResponse;
-import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getTextFromObject;
-import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.hasArtistOrVerifiedIconBadgeAttachment;
-import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareDesktopJsonBuilder;
-import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Shared functions for extracting YouTube channel pages and tabs.
@@ -156,6 +156,7 @@ public final class YoutubeChannelHelper {
         String id = channelId;
         JsonObject ajaxJson = null;
 
+        System.out.println("sjhan newpipe id = " + id);
         int level = 0;
         while (level < 8) {
             final byte[] body = JsonWriter.string(prepareDesktopJsonBuilder(
@@ -168,7 +169,7 @@ public final class YoutubeChannelHelper {
             final JsonObject jsonResponse = getJsonPostResponse(
                     "browse", body, localization);
 
-            System.out.println("sjhan newpiee level = " + level + " / JsonObject = " + jsonResponse.toString());
+            System.out.println("sjhan newpipe id = " + id + " / level = " + level + " / JsonObject = " + jsonResponse.toString());
 
             checkIfChannelResponseIsValid(jsonResponse);
 
