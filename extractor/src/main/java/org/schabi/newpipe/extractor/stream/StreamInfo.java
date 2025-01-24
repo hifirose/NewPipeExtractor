@@ -75,6 +75,8 @@ public class StreamInfo extends Info {
 
     public static StreamInfo getInfo(@Nonnull final StreamExtractor extractor)
             throws ExtractionException, IOException {
+
+        System.out.println("sjhan getInfo fetchPage extractor id = "+extractor.getId()+" / extractor.url = "+extractor.getUrl());
         extractor.fetchPage();
         final StreamInfo streamInfo;
         try {
