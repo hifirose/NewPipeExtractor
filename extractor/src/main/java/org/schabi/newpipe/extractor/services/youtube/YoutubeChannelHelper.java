@@ -166,6 +166,8 @@ public final class YoutubeChannelHelper {
             final JsonObject jsonResponse = getJsonPostResponse(
                     "browse", body, localization);
 
+            System.out.println("sjhan newpiee JsonObject = "+jsonResponse.toString());
+
             checkIfChannelResponseIsValid(jsonResponse);
 
             final JsonObject endpoint = jsonResponse.getArray("onResponseReceivedActions")
