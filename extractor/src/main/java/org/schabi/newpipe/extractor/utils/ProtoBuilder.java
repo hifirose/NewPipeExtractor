@@ -4,6 +4,7 @@ import com.migcomponents.migbase64.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -40,7 +41,7 @@ public class ProtoBuilder {
                 }
             }
         } catch (final IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -67,7 +68,7 @@ public class ProtoBuilder {
         try {
             byteBuffer.write(bytes);
         } catch (final IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 }
