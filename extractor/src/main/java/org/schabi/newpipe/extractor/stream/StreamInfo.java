@@ -69,27 +69,21 @@ public class StreamInfo extends Info {
 
     public static StreamInfo getInfo(@Nonnull final StreamingService service,
                                      final String url) throws IOException, ExtractionException {
-        System.out.println("sjhan getInfo url = "+url);
         return getInfo(service.getStreamExtractor(url));
     }
 
     public static StreamInfo getInfo(@Nonnull final StreamExtractor extractor)
             throws ExtractionException, IOException {
 
-        System.out.println("sjhan getInfo fetchPage extractor id = "+extractor.getId()+" / extractor.url = "+extractor.getUrl());
         extractor.fetchPage();
         final StreamInfo streamInfo;
         try {
             streamInfo = extractImportantData(extractor);
-            System.out.println("sjhan getInfo fetchPage 1 extractor id = "+extractor.getId()+" / extractor.url = "+extractor.getUrl());
             extractStreams(streamInfo, extractor);
-            System.out.println("sjhan getInfo fetchPage 2 extractor id = "+extractor.getId()+" / extractor.url = "+extractor.getUrl());
             extractOptionalData(streamInfo, extractor);
-            System.out.println("sjhan getInfo fetchPage 3 extractor id = "+extractor.getId()+" / extractor.url = "+extractor.getUrl());
             return streamInfo;
 
         } catch (final ExtractionException e) {
-            System.out.println("sjhan getInfo fetchPage error extractor id = "+extractor.getId()+" / extractor.url = "+extractor.getUrl());
             // Currently, YouTube does not distinguish between age restricted videos and videos
             // blocked by country. This means that during the initialisation of the extractor, the
             // extractor will assume that a video is age restricted while in reality it is blocked

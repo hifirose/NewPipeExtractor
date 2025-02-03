@@ -156,7 +156,6 @@ public final class YoutubeChannelHelper {
         String id = channelId;
         JsonObject ajaxJson = null;
 
-        System.out.println("sjhan newpipe id = " + id);
         int level = 0;
         while (level < 8) {
             final byte[] body = JsonWriter.string(prepareDesktopJsonBuilder(
@@ -168,8 +167,6 @@ public final class YoutubeChannelHelper {
 
             final JsonObject jsonResponse = getJsonPostResponse(
                     "browse", body, localization);
-
-            System.out.println("sjhan newpipe id = " + id + " / level = " + level + " / JsonObject = " + jsonResponse.toString());
 
             checkIfChannelResponseIsValid(jsonResponse);
 

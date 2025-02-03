@@ -100,7 +100,6 @@ public class YoutubeChannelExtractor extends ChannelExtractor {
             throws IOException, ExtractionException {
         final String channelPath = super.getId();
         final String id = resolveChannelId(channelPath);
-        System.out.println("sjhan onFetchPage id = " + id + " / channelPath " + channelPath);
         // Fetch Videos tab
         final YoutubeChannelHelper.ChannelResponseData data = getChannelResponse(id,
                 "EgZ2aWRlb3PyBgQKAjoA", getExtractorLocalization(), getExtractorContentCountry());
