@@ -31,8 +31,8 @@ public final class TimeAgoPatternsManager {
 
     @Nullable
     public static TimeAgoParser getTimeAgoParserFor(
-            @Nonnull final Localization localization,
-            @Nonnull final OffsetDateTime now) {
+        @Nonnull final Localization localization,
+        @Nonnull final OffsetDateTime now) {
         final PatternsHolder holder = getPatternsFor(localization);
 
         if (holder == null) {
